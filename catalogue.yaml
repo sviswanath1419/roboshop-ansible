@@ -45,7 +45,11 @@
       src: catalogue.service
       dest: /etc/systemd/system/catalogue.service
 
-  - name: deamon realod and start
+  # - name: deamon realod and start
+  #   ansible.builtin.systemd_service:
+  #     daemon_reload: true
+
+  - name: Just force systemd to reread configs (2.4 and above)
     ansible.builtin.systemd_service:
       daemon_reload: true
 
