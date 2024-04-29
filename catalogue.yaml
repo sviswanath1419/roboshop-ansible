@@ -7,68 +7,68 @@
         dnf module disable nodejs -y
         dnf module enable nodejs:18 -y
     
-  - name: nodejs org install
-    ansible.builtin.package:
-      name: nodejs
-      state: present
+    - name: nodejs org install
+      ansible.builtin.package:
+        name: nodejs
+        state: present
 
-  - name: user creation "roboshop"
-    ansible.builtin.user:
-      name: roboshop
-  
-  - name: Creates app directory
-    ansible.builtin.file:
-      path: /app
-      state: directory
-  
-  - name: move/cd to app directory
-    ansible.builtin.command:
-      cd /app
-    args:
-      chdir: /app
-  
-  # - name: Creates app directory
-  #   ansible.builtin.file:
-  #     path: /app
-  #     state: directory
+    - name: user creation "roboshop"
+      ansible.builtin.user:
+        name: roboshop
+    
+    - name: Creates app directory
+      ansible.builtin.file:
+        path: /app
+        state: directory
+    
+    - name: move/cd to app directory
+      ansible.builtin.command:
+        cd /app
+      args:
+        chdir: /app
+    
+    # - name: Creates app directory
+    #   ansible.builtin.file:
+    #     path: /app
+    #     state: directory
 
-  - name: Download file from a file path
-    ansible.builtin.get_url:
-      url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-      dest: /app
+    - name: Download file from a file path
+      ansible.builtin.get_url:
+        url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+        dest: /app
 
-  - name: Unarchive a file that is already on the remote machine
-    ansible.builtin.unarchive:
-      src: /tmp/catalogue.zip
-      dest: /app
-      remote_src: yes
+    - name: Unarchive a file that is already on the remote machine
+      ansible.builtin.unarchive:
+        src: /tmp/catalogue.zip
+        dest: /app
+        remote_src: yes
 
-  - name: npm install
-    ansible.builtin.command:
-      npm install
+    - name: npm install
+      ansible.builtin.command:
+        npm install
 
-  - name: catalogue.service  file copy
-    ansible.builtin.copy:
-      src: catalogue.service
-      dest: /etc/systemd/system/catalogue.service
+    - name: catalogue.service  file copy
+      ansible.builtin.copy:
+        src: catalogue.service
+        dest: /etc/systemd/system/catalogue.service
 
-  - name: Reload service catalogue
-    ansible.builtin.systemd_service:
-      name: catalogue.service
-      state: reloaded
+    - name: Reload service catalogue
+      ansible.builtin.systemd_service:
+        name: catalogue.service
+        state: reloaded
 
-  - name: catalogue service start
-    ansible.builtin.service:
-      name: catalogue.service
-      enabled: yes
-      state: started
+    - name: catalogue service start
+      ansible.builtin.service:
+        name: catalogue.service
+        enabled: yes
+        state: started
 
-  - name: mongodb repo file copy
-    ansible.builtin.copy:
-      src: mongodb.repo
-      dest: /etc/yum.repos.d/mongodb.repo
+    - name: mongodb repo file copy
+      ansible.builtin.copy:
+        src: mongodb.repo
+        dest: /etc/yum.repos.d/mongodb.repo
 
-  - name: mongodb-org shell install
-    ansible.builtin.package:
-      name: mongodb-org-shell
-      state: present
+    - name: mongodb-org shell install
+      ansible.builtin.package:
+        name: mongodb-org-shell
+        state: present
