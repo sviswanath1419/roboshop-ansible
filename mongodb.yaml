@@ -1,0 +1,9 @@
+- name: mongodb configuration
+  hosts: mongodb
+  tasks:
+  - name: mongodb package testt
+    ansible.builtin.package:
+      name: "{{item}}"
+      state: present
+    loop:
+    - git
