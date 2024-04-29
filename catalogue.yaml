@@ -10,7 +10,7 @@
         name: nodejs
         state: present
 
-    - name: user creation "roboshop"
+    - name: user creation roboshop
       ansible.builtin.user:
         name: roboshop
     
