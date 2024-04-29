@@ -2,10 +2,20 @@
   hosts: mongodb
   become: yes
   tasks:
-  - name: mongodb package testt
-    ansible.builtin.package:
-      name: "{{item}}"
-      state: present
-    loop:
-    - git
-    - net-tools
+  # - name: mongodb package testt
+    # ansible.builtin.package:
+    #   name: "{{item}}"
+    #   state: present
+    # loop:
+    # - git
+    # - net-tools
+  
+  - name: mongodb repo file copy
+    ansible.builtin.copy
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongo.repo
+  
+  - name: mongodb org install
+    ansible.builtin.command
+      dnf install mongodb-org -y
+       
