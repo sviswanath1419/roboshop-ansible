@@ -1,5 +1,6 @@
 - name: mongodb configuration
   hosts: mongodb
+  become: yes
   tasks:
   - name: mongodb package testt
     ansible.builtin.package:
