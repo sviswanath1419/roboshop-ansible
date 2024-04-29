@@ -3,9 +3,7 @@
   become: yes
   tasks:
     - name: dnf and nodejs installation
-      ansible.bultin.shell:
-        dnf module disable nodejs -y
-        dnf module enable nodejs:18 -y
+      ansible.bultin.shell: dnf module disable nodejs -y ; dnf module enable nodejs:18 -y
     
     - name: nodejs org install
       ansible.builtin.package:
