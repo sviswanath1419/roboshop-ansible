@@ -49,18 +49,18 @@
     ansible.builtin.systemd_service:
       daemon_reload: true
 
-    - name: catalogue service start
-      ansible.builtin.service:
-        name: catalogue.service
-        enabled: yes
-        state: started
+  # - name: catalogue service start
+  #   ansible.builtin.service:
+  #     name: catalogue.service
+  #     enabled: yes
+  #     state: started
 
-    - name: mongodb repo file copy
-      ansible.builtin.copy:
-        src: mongodb.repo
-        dest: /etc/yum.repos.d/mongodb.repo
+  - name: mongodb repo file copy
+    ansible.builtin.copy:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongodb.repo
 
-    - name: mongodb-org shell install
-      ansible.builtin.package:
-        name: mongodb-org-shell
-        state: present
+  - name: mongodb-org shell install
+    ansible.builtin.package:
+      name: mongodb-org-shell
+      state: present
